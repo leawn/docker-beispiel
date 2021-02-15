@@ -7,3 +7,15 @@ before_install:
 
 script:
   - docker run -e CI=true leawn/frontend npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-central-1"
+  app: "docker-beispiel"
+  env: "Dockerbeispiel-env"
+  bucket_name: "elasticbeanstalk-eu-central-1-294372157785"
+  bucket_path: "docker-beispiel"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
